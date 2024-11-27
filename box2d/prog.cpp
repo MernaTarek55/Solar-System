@@ -113,9 +113,9 @@ int main() {
             planet.draw(window);
 
         }
-        if (c % 10 == 0)
+        if (c % 15 == 0)
             sunSprite.setScale(-sunSprite.getScale().x, sunSprite.getScale().y);
-        c++;
+        c++; 
         window.display();
     }
     

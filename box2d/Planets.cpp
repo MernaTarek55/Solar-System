@@ -3,7 +3,8 @@
 
 Planets::Planets(b2World& world, sf::Texture& texture, sf::Vector2f position, b2Body* starBody)
     : body(nullptr), orbitArray(sf::LinesStrip) {
-    
+    PLANET_RADIUS = float((rand()%100)/10+5);
+    orbitcolor = sf::Color::Color(rand() % 255, rand() % 255, rand() % 255, 255);
     sprite.setTexture(texture);
     sprite.setOrigin(texture.getSize().x / 2.f, texture.getSize().y / 2.f);
     sprite.setScale(PLANET_RADIUS * 2.f / texture.getSize().x, PLANET_RADIUS * 2.f / texture.getSize().y);
@@ -29,7 +30,7 @@ void Planets::applyGravity(b2Body* starBody)
 {
     b2Vec2 planetPosition = body->GetPosition();
     b2Vec2 starPosition = starBody->GetPosition();
-
+    
     b2Vec2 direction = starPosition - planetPosition;
     float distance = direction.Length();
     if (distance > 0.1f) {
@@ -39,7 +40,7 @@ void Planets::applyGravity(b2Body* starBody)
         body->ApplyForceToCenter(force, true);
 
         sf::Vertex v(sprite.getPosition());
-        v.color = sf::Color::Yellow;
+        v.color = orbitcolor;
         orbitArray.append(v);
     }
 }
@@ -76,6 +77,5 @@ b2Vec2 Planets::pixelsToMeters(const sf::Vector2f& pixels)
 }
 const float Planets::PIXELS_PER_METER = 50.f;
 const float Planets::STAR_RADIUS = 50.f;
-const float Planets::PLANET_RADIUS = 10.f;
 const float Planets::GRAVITATIONAL_CONSTANT = 0.1f;
 const float Planets::STAR_MASS = 2000.f;

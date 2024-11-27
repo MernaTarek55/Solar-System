@@ -20,13 +20,13 @@ public:
     static b2Vec2 pixelsToMeters(const sf::Vector2f& pixels);
     static const float PIXELS_PER_METER;
     static const float STAR_RADIUS;
-    static const float PLANET_RADIUS;
+    float PLANET_RADIUS;
     static const float GRAVITATIONAL_CONSTANT;
     static const float STAR_MASS;
 private:
     
     
-    
+    sf::Color orbitcolor;
     void setInitialOrbitVelocity(b2Body* starBody) {
         b2Vec2 starPosition = starBody->GetPosition();
         b2Vec2 planetPosition = body->GetPosition();
